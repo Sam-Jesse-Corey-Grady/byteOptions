@@ -50,27 +50,52 @@ function embedData(data){
 
     })
 }
+function spoonCall(q){
+    $.ajax({
+        method: "GET",
+        url: `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONTACULAR_KEY}&query=${q}&offset=0&number=10`,
+        success: function(data){
+            console.log(data);
+            ingredientsCall(data)
+        }
+    })
+}
+function returnIngredients(data){
+   return data.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`)
+}
+
+function ingredientsCall(data){
+    $.ajax({
+        method: "GET",
+        url: `https://api.spoonacular.com/recipes/${data.results[0].id}/information?apiKey=${SPOONTACULAR_KEY}&includeNutrition=true`,
+        success: function(data){
+            console.log(data);
+            $("#spoon").html(`${data.title}<br> <ul>${returnIngredients(data)}</ul>${data.instructions}`)
+        }
+    })
+
+}
 $(document).ready(
 
     function(){
         $("#button").click(function(){
             let q = $("#search").val();
                 console.log(q)
-
-            getVideo(q);
+            // getVideo(q);
             console.log(q.indexOf("test") >= 0);
             let qq = document.getElementById("search").value.replaceAll(" ", "+");
+            spoonCall(qq);
             console.log(qq);
 
-            $("#google").append(`<iframe
-                width="600"
-                height="450"
-                style="border:0"
-                loading="lazy"
-                allowfullscreen
-                src="https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}
-                 &q=${qq},San+Antonio+TX">
-                 </iframe>`)
+            // $("#google").append(`<iframe
+            //     width="600"
+            //     height="450"
+            //     style="border:0"
+            //     loading="lazy"
+            //     allowfullscreen
+            //     src="https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}
+            //      &q=${qq},San+Antonio+TX">
+            //      </iframe>`)
 
         })
     }
