@@ -1,5 +1,11 @@
 
-
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JhZG1hbiIsImEiOiJja3BwbXZlMWswaG54MnVxamZwZTI4eTQxIn0.__eOLAN4s3MLNu7CNS79YQ';
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: [-74.5, 40], // starting position [lng, lat]
+    zoom: 9 // starting zoom
+});
 // $(document).ready(function(){
 //     var url,
 //         API_KEY = YOUTUBE_API_KEY,
@@ -17,6 +23,23 @@
 //
 //     }
 // )
+function getLocations(q){
+    $.ajax({
+        method: "GET",
+        url: `https://maps.googleapis.com/maps/api/place/findplacefromtext/json`,
+        data: {
+            key: GOOGLE_API_KEY,
+            input: q,
+            inputtype: "textquery",
+        },
+        success: function (data){
+            console.log(data);
+        }
+    })
+}
+
+
+
 function getVideo(q) {
     $.ajax({
         method: 'GET',
@@ -61,8 +84,9 @@ function spoonCall(q){
     })
 }
 function returnIngredients(data){
-   return data.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`)
+   return data.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join("");
 }
+
 
 function ingredientsCall(data){
     $.ajax({
@@ -81,6 +105,7 @@ $(document).ready(
         $("#button").click(function(){
             let q = $("#search").val();
                 console.log(q)
+            getLocations(q);
             // getVideo(q);
             console.log(q.indexOf("test") >= 0);
             let qq = document.getElementById("search").value.replaceAll(" ", "+");
