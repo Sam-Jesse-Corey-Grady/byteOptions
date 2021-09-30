@@ -4,9 +4,7 @@
 ![Pic1](https://user-images.githubusercontent.com/82352442/135528557-9843363e-668f-46ab-b45a-ecad0c24a0cd.png)
 ![Pic2](https://user-images.githubusercontent.com/82352442/135528826-ed513c1b-0b35-40d3-b7ed-32fe584f77c9.png)
 
-## Made by:
-###  Samuel Bowcut
-###  Jesse Sosa-Leffew
-### Corey Shaw
-### Grady Griffin
+## [Made by:](https://byteoptions.co/creators)
+![Creators](https://user-images.githubusercontent.com/82352442/135529382-5aaa4108-3479-4a40-ba84-230ee1019405.png)
+
 
